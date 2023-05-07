@@ -19,7 +19,7 @@
 
 class DB {
   // initial connection
-  public static $dbName = 'genpack';
+  public static $dbName = 'ecogreat';
   public static $user = 'root';
   public static $password = 'root';
   public static $host = 'localhost';
@@ -1079,5 +1079,4 @@ class MeekroDBEval {
     $this->text = $text;
   }
 }
-
 ?>

@@ -1,7 +1,7 @@
 <?php
 include('core/config.php');
 include('core/db.php');
-include('core/function.php');
+include('core/functions.php');
 
 if(!isLoggedIn()){
     header("Location: " . SITE_URL . "login.php"); //redirect to login page

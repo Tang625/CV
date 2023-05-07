@@ -10,4 +10,4 @@
 <link href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
 
 <!--External CSS-->
-<link rel="stylesheet" href="assets/functions/styles.css">
+<link rel="stylesheet" href="assets/functionalities/styles.css">

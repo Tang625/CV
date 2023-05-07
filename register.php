@@ -1,7 +1,7 @@
 <?php
 include('core/config.php');
 include('core/db.php');
-include('core/function.php');
+include('core/functions.php');
 
 if(!isLoggedIn()){
     header("Location: " . SITE_URL . "login.php");
@@ -12,7 +12,7 @@ $error = $errorReload = $warning = $successRedirect = "";
 
 if(isset($_POST['register'])){ # if the form is submitted
     $email = $_POST['email'];
-    $domain = isset(explode('genpack@', $email)[1]);
+    $domain = isset(explode('ecogreat@', $email)[1]);
     $userName = $_POST['userName'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
@@ -26,14 +26,14 @@ if(isset($_POST['register'])){ # if the form is submitted
                 if(!isBlankField($password)){
                     if($password == $confirmPassword){
                         
-                        $userQuery = DB::query("SELECT * FROM user WHERE userEmail = %s", $email);
+                        $userQuery = DB::query("SELECT * FROM users WHERE userEmail = %s", $email);
                         $userCount = DB::count();
                         
                         if($userCount == 0){
                             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                             
                             DB::startTransaction();
-                            DB::insert("user", [
+                            DB::insert("users", [
                                 'userEmail' => $email,
                                 'userName' => $userName,
                                 'userPassword' => $hashedPassword,
@@ -79,20 +79,17 @@ if(isset($_POST['register'])){ # if the form is submitted
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo SITE_NAME; ?>-User Register</title>
-    <link rel="icon" href="assets/images/g-pack.ico">
+    <link rel="icon" href="assets/images/eco-icon.ico">
 
     <?php include 'templates/styles.php'; ?>
 </head>
 
-<body id="page4">
+<body>
     <div class="container">
-        <div class="col-lg-12 logo-line">
-                <h1>
-                    <img src="assets/images/g-pack-2.png" alt="logo"/>en Pack
-                    Enterprise
-                </h1>
+        <div class="col-lg-12" style="text-align: center;">
+            <img src="assets/images/ecogreat-03.png" alt="logo"/>
         </div>
-        <h3 class="fw-normal myAdmin-line" style="text-align: center;">Gen Pack MyAdmin</h3><br>
+        <p class="subTitle topLine" style="text-align: center;">ECOGreat Clock System - User Register</p><br>
         <h3 style="text-align: center;">Please enter the following details for a new user:</h3>
         <form method="POST" class="form-insert">
             <div class="mb-3 div-insert">
@@ -122,13 +119,13 @@ if(isset($_POST['register'])){ # if the form is submitted
             <div class="div-insert">
                 <button class="btn btn-primary" name="register" type="submit">Register
                 </button>
-                <a href="user.php" class="btn btn-secondary">Back</a>
+                <a href="users.php" class="btn btn-secondary">Back</a>
             </div>
         </form>
     </div>
 
     <?php
-    include 'templates/script.php';
+    include 'templates/scripts.php';
     
     if($error){
         sweetAlert("error", "Opps...", $error, 6000);
